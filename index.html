@@ -1,7 +1,452 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ian D. Gow</title>
+  <style>
+    :root {
+      --bg:           #ffffff;
+      --bg-alt:       #f4f6f8;
+      --text:         #1c1c2e;
+      --text-muted:   #566375;
+      --accent:       #1a4f82;
+      --accent-light: #2878c3;
+      --border:       #d0d5dd;
+    }
+    [data-theme="dark"] {
+      --bg:           #0f1117;
+      --bg-alt:       #1a1f2e;
+      --text:         #e2e8f0;
+      --text-muted:   #94a3b8;
+      --accent:       #60a5fa;
+      --accent-light: #93c5fd;
+      --border:       #2d3748;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a { color: var(--accent-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Theme toggle ── */
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: inherit;
+      transition: border-color 0.2s, color 0.2s;
+      z-index: 100;
+    }
+    #theme-toggle:hover {
+      border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding-bottom: 1.75rem;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 2.25rem;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25rem 0.6rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .contact-bar a { color: var(--text-muted); }
+    .contact-bar a:hover { color: var(--accent-light); text-decoration: none; }
+    .sep { color: var(--border); }
+
+    /* ── Section chrome ── */
+    section { margin-bottom: 2.25rem; }
+    section h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ── Summary ── */
+    #summary p { font-size: 0.95rem; }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 0.7rem;
+    }
+    .skill-item {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.9rem;
+    }
+    .skill-item strong { display: block; font-size: 0.88rem; margin-bottom: 0.15rem; }
+    .skill-item span { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* ── Books ── */
+    .book-list { display: grid; gap: 1rem; }
+    .book {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 1rem 1.15rem;
+    }
+    .book h3 { font-size: 0.97rem; margin-bottom: 0.3rem; }
+    .book h3 a { color: var(--text); }
+    .book h3 a:hover { color: var(--accent-light); text-decoration: none; }
+    .book-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.45rem; }
+    .book-desc { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .book-links { font-size: 0.83rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+
+    /* ── Resources grid ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 0.65rem;
+    }
+    .resource-item {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem 0.9rem;
+    }
+    .resource-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+    .resource-item a { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+    .resource-item a:hover { color: var(--accent-light); text-decoration: none; }
+
+    /* ── Experience ── */
+    .job { margin-bottom: 1.35rem; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+      margin-bottom: 0.1rem;
+    }
+    .job-org { font-weight: 700; font-size: 0.97rem; }
+    .job-period { font-size: 0.82rem; color: var(--text-muted); }
+    .job-title { font-style: italic; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+    .job ul { padding-left: 1.15rem; margin-top: 0.3rem; }
+    .job li { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+
+    /* ── Education ── */
+    .edu-list { list-style: none; }
+    .edu-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .edu-list li:last-child { border-bottom: none; }
+    .edu-degree { font-weight: 600; }
+    .edu-school { color: var(--text-muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 560px) {
+      header h1 { font-size: 1.8rem; }
+      .job-header { flex-direction: column; gap: 0; }
+    }
+
+    @media print {
+      #theme-toggle { display: none; }
+      body { background: white; color: black; font-size: 11pt; }
+      .page { padding: 0; }
+      a { color: inherit; }
+      .book, .skill-item, .resource-item { background: white; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+<button id="theme-toggle">Dark mode</button>
+
+<div class="page">
+
+  <header>
+    <h1>Ian D. Gow</h1>
+    <div class="contact-bar">
+      <span>Chestnut Hill, MA</span>
+      <span class="sep">|</span>
+      <a href="mailto:iandgow@gmail.com">iandgow@gmail.com</a>
+      <span class="sep">|</span>
+      <a href="tel:+14082427000">+1-408-242-7000</a>
+      <span class="sep">|</span>
+      <a href="https://www.linkedin.com/in/iangow/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="sep">|</span>
+      <a href="https://github.com/iangow" target="_blank" rel="noopener">GitHub</a>
+      <span class="sep">|</span>
+      <a href="https://scholar.google.com/citations?user=65ZkVsUAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+    </div>
+  </header>
+
+  <section id="summary">
+    <h2>Professional Summary</h2>
+    <p>Experienced finance professional and valuation expert with over 20 years of experience across corporate finance, consulting, and academia. Former consultant at Stern Stewart, financial analyst at Morgan Stanley and GM, and professor at Harvard Business School and the University of Melbourne. Deep expertise in causal inference, data analysis, and financial modelling. Author of two books and numerous academic articles.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Core Skills &amp; Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <strong>Financial Analysis &amp; Valuation</strong>
+        <span>Performance measurement, financial statement analysis, and valuation metrics</span>
+      </div>
+      <div class="skill-item">
+        <strong>Business Strategy</strong>
+        <span>Investment analysis, business model evaluation, and corporate finance consulting</span>
+      </div>
+      <div class="skill-item">
+        <strong>Data Science &amp; Modelling</strong>
+        <span>R, Python, SQL; causal inference, statistical modelling, authored CRAN and PyPI packages</span>
+      </div>
+      <div class="skill-item">
+        <strong>Academic Research</strong>
+        <span>Corporate governance, capital markets, and empirical methodology published in leading journals</span>
+      </div>
+      <div class="skill-item">
+        <strong>Communication</strong>
+        <span>Author of two books, opinion pieces, and practitioner articles; television, radio, and podcast appearances</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="books">
+    <h2>Books</h2>
+    <div class="book-list">
+
+      <div class="book">
+        <h3><a href="https://www.blackincbooks.com.au/books/big-four" target="_blank" rel="noopener">The Big Four: The Curious Past and Perilous Future of the Global Accounting Monopoly</a></h3>
+        <div class="book-meta">Black Inc. Books &middot; Winner of the 2018 Ashurst Business Literature Prize</div>
+        <p class="book-desc">An investigation into the dominance of Deloitte, EY, KPMG, and PwC &mdash; tracing how they came to control global auditing and consulting, and the systemic risks their concentration of power poses.</p>
+      </div>
+
+      <div class="book">
+        <h3>Empirical Research in Accounting: Tools and Methods</h3>
+        <div class="book-meta">2024 &middot; Available in R and Python editions</div>
+        <p class="book-desc">A course book for advanced undergraduate and introductory PhD students covering regression, causal inference (natural experiments, instrumental variables, regression discontinuity), and capital markets research, with hands-on analysis of real financial data.</p>
+        <div class="book-links">
+          <a href="https://iangow.github.io/far_book/" target="_blank" rel="noopener">R edition</a>
+          <a href="https://iangow.github.io/era_pl_book/" target="_blank" rel="noopener">Python (Polars) edition</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="resources">
+    <h2>Online Resources</h2>
+    <div class="resource-grid">
+      <div class="resource-item">
+        <div class="resource-label">GitHub</div>
+        <a href="https://github.com/iangow" target="_blank" rel="noopener">github.com/iangow</a>
+      </div>
+      <div class="resource-item">
+        <div class="resource-label">R Package (CRAN)</div>
+        <a href="https://cran.r-project.org/web/packages/farr/" target="_blank" rel="noopener">farr</a>
+      </div>
+      <div class="resource-item">
+        <div class="resource-label">Python Package (PyPI)</div>
+        <a href="https://pypi.org/project/wrds2pg/" target="_blank" rel="noopener">wrds2pg</a>
+      </div>
+      <div class="resource-item">
+        <div class="resource-label">Academic Papers</div>
+        <a href="https://scholar.google.com/citations?user=65ZkVsUAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      </div>
+      <div class="resource-item">
+        <div class="resource-label">LinkedIn</div>
+        <a href="https://www.linkedin.com/in/iangow/" target="_blank" rel="noopener">linkedin.com/in/iangow</a>
+      </div>
+      <div class="resource-item">
+        <div class="resource-label">Writing</div>
+        <a href="https://substack.com/@iangow450309" target="_blank" rel="noopener">Substack</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Professional Experience</h2>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">University of Melbourne</span>
+        <span class="job-period">July 2017 – November 2025</span>
+      </div>
+      <div class="job-title">Professor and Director, Melbourne Centre for Corporate Governance and Regulation &mdash; Melbourne, Australia</div>
+      <ul>
+        <li>Led the engagement-focused Melbourne Centre for Corporate Governance and Regulation (funding ended 2021).</li>
+        <li>Advised PhD and honours students on financial modelling, causal analysis, and empirical research design; led a review of the PhD program.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">Yale School of Management</span>
+        <span class="job-period">2020</span>
+      </div>
+      <div class="job-title">Visiting Professor &mdash; New Haven, CT</div>
+      <ul>
+        <li>Taught MBA and graduate-level courses on accounting and valuation.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">Harvard Business School</span>
+        <span class="job-period">2011 – 2017</span>
+      </div>
+      <div class="job-title">Assistant Professor &mdash; Boston, MA</div>
+      <ul>
+        <li>Taught MBA courses in Business Analysis &amp; Valuation and Financial Reporting &amp; Control, executive education programs on strategic financial analysis, and PhD courses on empirical research.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">Kellogg School of Management</span>
+        <span class="job-period">2009 – 2011</span>
+      </div>
+      <div class="job-title">Assistant Professor &mdash; Evanston, IL</div>
+      <ul>
+        <li>Taught introductory MBA accounting course.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">Morgan Stanley</span>
+        <span class="job-period">2004 (full-time); 2004 – 2006 (part-time)</span>
+      </div>
+      <div class="job-title">Equity Research Analyst &mdash; New York, NY</div>
+      <ul>
+        <li>Member of the Global Valuation and Accounting Team (GVAT); provided guidance on valuation and accounting with a focus on Asia-Pacific and Japan.</li>
+        <li>Developed an intrinsic valuation model for use by institutional clients.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">General Motors</span>
+        <span class="job-period">2002 – 2003</span>
+      </div>
+      <div class="job-title">Senior Financial Analyst, Treasurer's Office &mdash; New York, NY</div>
+      <ul>
+        <li>Worked in structured finance and business development roles.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">Stern Stewart &amp; Co.</span>
+        <span class="job-period">1997 – 2000</span>
+      </div>
+      <div class="job-title">Associate &mdash; New York, NY and Sydney, Australia</div>
+      <ul>
+        <li>Value-based management and corporate finance consulting for clients in Australia, New Zealand, Canada, and the United States.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-org">Andersen Consulting (now Accenture)</span>
+        <span class="job-period">1995 – 1996</span>
+      </div>
+      <div class="job-title">Business Analyst, Strategic Services &mdash; Sydney, Australia</div>
+      <ul>
+        <li>Strategy consulting for clients in Australia and New Zealand.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ul class="edu-list">
+      <li>
+        <span class="edu-degree">PhD, Business Administration</span>
+        <span class="edu-school">Stanford University Graduate School of Business</span>
+      </li>
+      <li>
+        <span class="edu-degree">MBA with Distinction</span>
+        <span class="edu-school">Harvard Business School</span>
+      </li>
+      <li>
+        <span class="edu-degree">BCom (Accounting) and LLB</span>
+        <span class="edu-school">University of New South Wales</span>
+      </li>
+    </ul>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+    localStorage.setItem('theme', theme);
+  }
+
+  const saved = localStorage.getItem('theme')
+    || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme(saved);
+
+  toggle.addEventListener('click', () => {
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+</script>
+
 </body>
 </html>
