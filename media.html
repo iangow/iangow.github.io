@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media — Ian D. Gow</title>
+  <style>
+    :root {
+      --bg:           #ffffff;
+      --bg-alt:       #f4f6f8;
+      --text:         #1c1c2e;
+      --text-muted:   #566375;
+      --accent:       #1a4f82;
+      --accent-light: #2878c3;
+      --border:       #d0d5dd;
+    }
+    [data-theme="dark"] {
+      --bg:           #0f1117;
+      --bg-alt:       #1a1f2e;
+      --text:         #e2e8f0;
+      --text-muted:   #94a3b8;
+      --accent:       #60a5fa;
+      --accent-light: #93c5fd;
+      --border:       #2d3748;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a { color: var(--accent-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: inherit;
+      transition: border-color 0.2s, color 0.2s;
+      z-index: 100;
+    }
+    #theme-toggle:hover {
+      border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .back-link:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      padding-bottom: 1.75rem;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 2.25rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    header p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    section { margin-bottom: 2.25rem; }
+    section h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .media-list { display: grid; gap: 0.7rem; }
+    .media-item {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .media-outlet {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+    }
+    .media-item a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .media-item a:hover { color: var(--accent-light); text-decoration: none; }
+    .media-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 560px) {
+      header h1 { font-size: 1.6rem; }
+    }
+
+    @media print {
+      #theme-toggle { display: none; }
+      body { background: white; color: black; font-size: 11pt; }
+      .page { padding: 0; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+
+<button id="theme-toggle">Dark mode</button>
+
+<div class="page">
+
+  <a class="back-link" href="index.html">← Ian D. Gow</a>
+
+  <header>
+    <h1>Media</h1>
+    <p>Television, radio, podcast, and print appearances.</p>
+  </header>
+
+  <section id="the-big-four">
+    <h2>The Big Four</h2>
+    <div class="media-list">
+
+      <div class="media-item">
+        <div class="media-outlet">Australian Financial Review &middot; Read</div>
+        <a href="https://www.afr.com/companies/professional-services/deloitte-ey-kmpw-and-pwc-face-global-threats-new-book-20180314-h0xg59" target="_blank" rel="noopener">Deloitte, EY, KPMG and PwC face global threats, new book</a>
+        <div class="media-date">14 March 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">Australian Financial Review &middot; Read</div>
+        <a href="https://www.afr.com/companies/professional-services/pwc-ey-kpmg-deloitte-difficult-future-awaits-big-four-accounting-businesses-20180325-h0xxor" target="_blank" rel="noopener">PwC, EY, KPMG, Deloitte: difficult future awaits Big Four accounting businesses</a>
+        <div class="media-date">25 March 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">The Guardian &middot; Read</div>
+        <a href="https://www.theguardian.com/commentisfree/article/2024/jun/13/the-pwc-scandal-put-the-big-four-in-the-spotlight-but-hyper-corporate-capitalism-remains-untouched" target="_blank" rel="noopener">The PwC scandal put the Big Four in the spotlight, but hyper-corporate capitalism remains untouched</a>
+        <div class="media-date">13 June 2024</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">The Guardian &middot; Read</div>
+        <a href="https://www.theguardian.com/commentisfree/2023/jul/25/a-shake-up-of-the-big-four-consulting-firms-requires-a-level-of-public-understanding-we-are-yet-to-reach" target="_blank" rel="noopener">A shake-up of the Big Four consulting firms requires a level of public understanding we are yet to reach</a>
+        <div class="media-date">25 July 2023</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">The Guardian &middot; Read</div>
+        <a href="https://www.theguardian.com/commentisfree/2023/jun/04/the-big-four-firms-are-incapable-of-unwinding-their-own-deep-seated-conflicts" target="_blank" rel="noopener">The Big Four firms are incapable of unwinding their own deep-seated conflicts</a>
+        <div class="media-date">4 June 2023</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">The Wall Street Journal &middot; Read</div>
+        <a href="https://www.wsj.com/articles/the-big-four-review-titans-of-the-books-1537723943" target="_blank" rel="noopener">The Big Four review: Titans of the Books</a>
+        <div class="media-date">23 September 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">Sky News Business &middot; Watch</div>
+        <a href="https://www.skynews.com.au/business/the-big-four-accounting-firms-face-challenges-in-disruption-competition-and-regulation-professor-iam-gow-tells-sky-new-business/video/aaa64560f431dc28a9790e86c8f45d4d" target="_blank" rel="noopener">The Big Four accounting firms face challenges in disruption, competition and regulation</a>
+        <div class="media-date">27 March 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">ABC Radio National &middot; Listen</div>
+        <a href="http://www.abc.net.au/radionational/programs/latenightlive/the-big-four:the-curious-history-and-perilous-future-of-the-glo/9618708" target="_blank" rel="noopener"><em>The Big Four</em>: the curious history and perilous future of the global accounting monopoly</a>
+        <div class="media-date">Late Night Live with Phillip Adams &middot; 4 April 2018</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+    localStorage.setItem('theme', theme);
+  }
+
+  const saved = localStorage.getItem('theme')
+    || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme(saved);
+
+  toggle.addEventListener('click', () => {
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+</script>
+
+</body>
+</html>

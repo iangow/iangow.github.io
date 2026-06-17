@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Big Four — Ian D. Gow</title>
+  <style>
+    :root {
+      --bg:           #ffffff;
+      --bg-alt:       #f4f6f8;
+      --text:         #1c1c2e;
+      --text-muted:   #566375;
+      --accent:       #1a4f82;
+      --accent-light: #2878c3;
+      --border:       #d0d5dd;
+    }
+    [data-theme="dark"] {
+      --bg:           #0f1117;
+      --bg-alt:       #1a1f2e;
+      --text:         #e2e8f0;
+      --text-muted:   #94a3b8;
+      --accent:       #60a5fa;
+      --accent-light: #93c5fd;
+      --border:       #2d3748;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    a { color: var(--accent-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: inherit;
+      transition: border-color 0.2s, color 0.2s;
+      z-index: 100;
+    }
+    #theme-toggle:hover {
+      border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .back-link:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      padding-bottom: 1.75rem;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 2.25rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .book-meta {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .award {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .buy-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.1rem;
+    }
+    .buy-links a {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 5px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .buy-links a:hover { opacity: 0.85; text-decoration: none; }
+    .buy-links a.secondary {
+      background: transparent;
+      color: var(--accent-light);
+      border: 1px solid var(--accent-light);
+    }
+    .buy-links a.secondary:hover { opacity: 0.85; }
+
+    section { margin-bottom: 2.25rem; }
+    section h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .description p {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .media-list { display: grid; gap: 0.7rem; }
+    .media-item {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .media-outlet {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+    }
+    .media-item a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .media-item a:hover { color: var(--accent-light); text-decoration: none; }
+    .media-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .praise-list { display: grid; gap: 1rem; }
+    .praise-item {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 1rem 1.15rem;
+    }
+    .praise-quote {
+      font-size: 0.92rem;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .praise-attribution {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .awards-list { list-style: none; display: grid; gap: 0.5rem; }
+    .awards-list li {
+      font-size: 0.92rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+    .awards-list li::before {
+      content: "🏆";
+      position: absolute;
+      left: 0;
+      font-style: normal;
+    }
+    .awards-list li.shortlisted::before { content: "🥈"; }
+
+    @media (max-width: 560px) {
+      header h1 { font-size: 1.5rem; }
+    }
+
+    @media print {
+      #theme-toggle { display: none; }
+      body { background: white; color: black; font-size: 11pt; }
+      .page { padding: 0; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+
+<button id="theme-toggle">Dark mode</button>
+
+<div class="page">
+
+  <a class="back-link" href="index.html">← Ian D. Gow</a>
+
+  <header>
+    <h1>The Big Four: The Curious Past and Perilous Future of the Global Accounting Monopoly</h1>
+    <div class="book-meta">Ian D. Gow &amp; Stuart Kells &middot; Black Inc. Books, 2018</div>
+    <div class="award">Winner — 2018 Ashurst Business Literature Prize</div>
+    <div class="award" style="margin-left:0.4rem;">Shortlisted — 2019 NSW Premier's History Awards</div>
+    <p style="font-size:0.95rem; color:var(--text-muted);">
+      An investigation into the dominance of Deloitte, EY, KPMG, and PwC &mdash; tracing how they
+      came to control global auditing and consulting, and the systemic risks their concentration of
+      power poses to markets, regulation, and the public interest.
+    </p>
+    <div class="buy-links">
+      <a href="https://www.blackincbooks.com.au/books/big-four" target="_blank" rel="noopener">Publisher (Black Inc.)</a>
+      <a href="https://www.amazon.com/Big-Four-Curious-Perilous-Accounting/dp/1541762274" target="_blank" rel="noopener" class="secondary">Amazon</a>
+    </div>
+  </header>
+
+  <section id="description">
+    <h2>About the Book</h2>
+    <div class="description">
+      <p>
+        The Big Four &mdash; Deloitte, EY, KPMG, and PwC &mdash; audit the vast majority of the
+        world's largest companies, advise governments on tax and policy, and sit at the centre of
+        global finance. Yet they operate with remarkably little scrutiny. How did four firms come
+        to hold such extraordinary power? And what happens when they fail?
+      </p>
+      <p>
+        Drawing on extensive research and interviews, Ian Gow and Stuart Kells trace the history
+        of these firms from their Victorian-era origins through a century of mergers, scandals,
+        and political influence. The book examines the conflicts of interest baked into the audit
+        model, the firms' role in major corporate collapses, and the regulatory capture that has
+        shielded them from accountability.
+      </p>
+      <p>
+        <em>The Big Four</em> is an essential read for anyone who wants to understand how modern
+        capitalism really works &mdash; and who is watching over it.
+      </p>
+    </div>
+  </section>
+
+  <section id="praise">
+    <h2>Praise</h2>
+    <div class="praise-list">
+
+      <div class="praise-item">
+        <p class="praise-quote">"An invaluable contribution &hellip; acknowledges the firms' immense power and the seriousness of their neglect of traditional responsibilities. <em>The Big Four</em> will appeal to all those interested in the future of the profession &mdash; and of capitalism itself."</p>
+        <div class="praise-attribution">Jane Gleeson-White &mdash; <a href="https://www.wsj.com/articles/the-big-four-review-titans-of-the-books-1537723943" target="_blank" rel="noopener"><em>The Wall Street Journal</em></a>, 23 September 2018</div>
+      </div>
+
+      <div class="praise-item">
+        <p class="praise-quote">"Who would have ever thought that one would find a deep understanding of the issues facing today's Big Four in the rise and fall of the Medici bank? Gow and Kells provide a riveting analysis of the historical antecedents to today's Big Four structures and strategies and leave us totally unsettled in considering the industry's future. A unique approach of historical comparisons results in a must-read volume of an essential industry that is poorly understood. I could not put it down!"</p>
+        <div class="praise-attribution">Leonard A. Schlesinger &mdash; Harvard Business School</div>
+      </div>
+
+      <div class="praise-item">
+        <p class="praise-quote">"Major international accounting firms play a fundamental role in the governance of the world's largest public companies. The quality of financial statements is crucial for evaluating executives and valuing firms. <em>The Big Four</em> delves into the origin of these firms and the role they play in businesses around the globe. Like many organizations, the future for accounting firms is uncertain. How will this profession adapt to its new environment? <em>The Big Four</em> tells the reader what to expect. This is a must read for executives and directors alike."</p>
+        <div class="praise-attribution">David Larcker &mdash; James Irvin Miller Professor of Accounting, Stanford University Graduate School of Business</div>
+      </div>
+
+      <div class="praise-item">
+        <p class="praise-quote">"A fascinating book &hellip; I highly recommend it."</p>
+        <div class="praise-attribution">Ticky Fullerton &mdash; Sky Business</div>
+      </div>
+
+      <div class="praise-item">
+        <p class="praise-quote">"Great fun. I enjoyed it."</p>
+        <div class="praise-attribution">Phillip Adams &mdash; <em>Late Night Live</em>, ABC Radio National</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="media">
+    <h2>Media Coverage</h2>
+    <div class="media-list">
+
+      <div class="media-item">
+        <div class="media-outlet">The Guardian &middot; Read</div>
+        <a href="https://www.theguardian.com/commentisfree/article/2024/jun/13/the-pwc-scandal-put-the-big-four-in-the-spotlight-but-hyper-corporate-capitalism-remains-untouched" target="_blank" rel="noopener">The PwC scandal put the Big Four in the spotlight, but hyper-corporate capitalism remains untouched</a>
+        <div class="media-date">13 June 2024</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">The Guardian &middot; Read</div>
+        <a href="https://www.theguardian.com/commentisfree/2023/jul/25/a-shake-up-of-the-big-four-consulting-firms-requires-a-level-of-public-understanding-we-are-yet-to-reach" target="_blank" rel="noopener">A shake-up of the Big Four consulting firms requires a level of public understanding we are yet to reach</a>
+        <div class="media-date">25 July 2023</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">The Guardian &middot; Read</div>
+        <a href="https://www.theguardian.com/commentisfree/2023/jun/04/the-big-four-firms-are-incapable-of-unwinding-their-own-deep-seated-conflicts" target="_blank" rel="noopener">The Big Four firms are incapable of unwinding their own deep-seated conflicts</a>
+        <div class="media-date">4 June 2023</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">Australian Financial Review &middot; Read</div>
+        <a href="https://www.afr.com/companies/professional-services/deloitte-ey-kmpw-and-pwc-face-global-threats-new-book-20180314-h0xg59" target="_blank" rel="noopener">Deloitte, EY, KPMG and PwC face global threats, new book</a>
+        <div class="media-date">14 March 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">Australian Financial Review &middot; Read</div>
+        <a href="https://www.afr.com/companies/professional-services/pwc-ey-kpmg-deloitte-difficult-future-awaits-big-four-accounting-businesses-20180325-h0xxor" target="_blank" rel="noopener">PwC, EY, KPMG, Deloitte: difficult future awaits Big Four accounting businesses</a>
+        <div class="media-date">25 March 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">Sky News Business &middot; Watch</div>
+        <a href="https://www.skynews.com.au/business/the-big-four-accounting-firms-face-challenges-in-disruption-competition-and-regulation-professor-iam-gow-tells-sky-new-business/video/aaa64560f431dc28a9790e86c8f45d4d" target="_blank" rel="noopener">The Big Four accounting firms face challenges in disruption, competition and regulation</a>
+        <div class="media-date">27 March 2018</div>
+      </div>
+
+      <div class="media-item">
+        <div class="media-outlet">ABC Radio National &middot; Listen</div>
+        <a href="http://www.abc.net.au/radionational/programs/latenightlive/the-big-four:the-curious-history-and-perilous-future-of-the-glo/9618708" target="_blank" rel="noopener"><em>The Big Four</em>: the curious history and perilous future of the global accounting monopoly</a>
+        <div class="media-date">Late Night Live with Phillip Adams &middot; 4 April 2018</div>
+      </div>
+
+    </div>
+    <p style="margin-top:1rem;font-size:0.85rem;"><a href="media.html">See all media appearances →</a></p>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+    localStorage.setItem('theme', theme);
+  }
+
+  const saved = localStorage.getItem('theme')
+    || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme(saved);
+
+  toggle.addEventListener('click', () => {
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+</script>
+
+</body>
+</html>
