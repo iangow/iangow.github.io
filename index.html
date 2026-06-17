@@ -160,6 +160,42 @@
     .resource-item a { font-size: 0.88rem; font-weight: 500; color: var(--text); }
     .resource-item a:hover { color: var(--accent-light); text-decoration: none; }
 
+    /* ── Software ── */
+    .software-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .lang-head {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+    .pkg-list { display: grid; gap: 0.6rem; }
+    .pkg {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.9rem;
+    }
+    .pkg-name { font-size: 0.92rem; font-weight: 600; font-family: ui-monospace, 'Cascadia Code', monospace; margin-bottom: 0.2rem; }
+    .pkg-name a { color: var(--text); }
+    .pkg-name a:hover { color: var(--accent-light); text-decoration: none; }
+    .pkg-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+    .pkg-links { display: flex; gap: 0.6rem; font-size: 0.78rem; }
+    .pkg-links a {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.1rem 0.5rem;
+      color: var(--text-muted);
+    }
+    .pkg-links a:hover { border-color: var(--accent-light); color: var(--accent-light); text-decoration: none; }
+    @media (max-width: 560px) { .software-cols { grid-template-columns: 1fr; } }
+
     /* ── Experience ── */
     .job { margin-bottom: 1.35rem; }
     .job-header {
@@ -284,20 +320,76 @@
     </div>
   </section>
 
+  <section id="software">
+    <h2>Open-Source Software</h2>
+    <div class="software-cols">
+
+      <div class="software-group">
+        <div class="lang-head">R Packages</div>
+        <div class="pkg-list">
+          <div class="pkg">
+            <div class="pkg-name"><a href="https://iangow.github.io/db2pqr/" target="_blank" rel="noopener">db2pq</a></div>
+            <div class="pkg-desc">Convert database tables to Parquet files</div>
+            <div class="pkg-links">
+              <a href="https://cran.r-project.org/web/packages/db2pq/" target="_blank" rel="noopener">CRAN</a>
+              <a href="https://iangow.github.io/db2pqr/" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </div>
+          <div class="pkg">
+            <div class="pkg-name"><a href="https://iangow.github.io/dera_pq/" target="_blank" rel="noopener">dera.pq</a></div>
+            <div class="pkg-desc">SEC DERA data sets as local Parquet files</div>
+            <div class="pkg-links">
+              <a href="https://iangow.github.io/dera_pq/" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </div>
+          <div class="pkg">
+            <div class="pkg-name"><a href="https://iangow.github.io/farr/" target="_blank" rel="noopener">farr</a></div>
+            <div class="pkg-desc">Data and code for financial accounting research</div>
+            <div class="pkg-links">
+              <a href="https://cran.r-project.org/web/packages/farr/" target="_blank" rel="noopener">CRAN</a>
+              <a href="https://iangow.github.io/farr/" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </div>
+          <div class="pkg">
+            <div class="pkg-name"><a href="https://iangow.github.io/ffiec.pq/" target="_blank" rel="noopener">ffiec.pq</a></div>
+            <div class="pkg-desc">Process FFIEC zip files into Parquet files</div>
+            <div class="pkg-links">
+              <a href="https://iangow.github.io/ffiec.pq/" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="software-group">
+        <div class="lang-head">Python Packages</div>
+        <div class="pkg-list">
+          <div class="pkg">
+            <div class="pkg-name"><a href="https://iangow.github.io/db2pq/" target="_blank" rel="noopener">db2pq</a></div>
+            <div class="pkg-desc">Convert database tables to Parquet files</div>
+            <div class="pkg-links">
+              <a href="https://pypi.org/project/db2pq/" target="_blank" rel="noopener">PyPI</a>
+              <a href="https://iangow.github.io/db2pq/" target="_blank" rel="noopener">Docs</a>
+            </div>
+          </div>
+          <div class="pkg">
+            <div class="pkg-name"><a href="https://pypi.org/project/wrds2pg/" target="_blank" rel="noopener">wrds2pg</a></div>
+            <div class="pkg-desc">Convert WRDS SAS data to PostgreSQL, Parquet, or CSV</div>
+            <div class="pkg-links">
+              <a href="https://pypi.org/project/wrds2pg/" target="_blank" rel="noopener">PyPI</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <section id="resources">
     <h2>Online Resources</h2>
     <div class="resource-grid">
       <div class="resource-item">
         <div class="resource-label">GitHub</div>
         <a href="https://github.com/iangow" target="_blank" rel="noopener">github.com/iangow</a>
-      </div>
-      <div class="resource-item">
-        <div class="resource-label">R Package (CRAN)</div>
-        <a href="https://cran.r-project.org/web/packages/farr/" target="_blank" rel="noopener">farr</a>
-      </div>
-      <div class="resource-item">
-        <div class="resource-label">Python Package (PyPI)</div>
-        <a href="https://pypi.org/project/wrds2pg/" target="_blank" rel="noopener">wrds2pg</a>
       </div>
       <div class="resource-item">
         <div class="resource-label">Academic Papers</div>
