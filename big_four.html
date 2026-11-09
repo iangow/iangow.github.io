@@ -136,6 +136,25 @@
       margin-bottom: 0.8rem;
     }
 
+    .editions-intro { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.1rem; }
+    .editions-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .edition-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .edition-card a { display: flex; flex-direction: column; height: 100%; padding: 1rem; color: var(--text); }
+    .edition-card a:hover { text-decoration: none; }
+    .edition-card a:hover .edition-label { color: var(--accent-light); text-decoration: underline; }
+    .edition-card a:focus-visible { outline: 3px solid var(--accent-light); outline-offset: -3px; }
+    .edition-cover { height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; }
+    .edition-cover img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+    .edition-label { font-size: 0.92rem; font-weight: 600; }
+    .edition-publisher, .edition-note { font-size: 0.78rem; color: var(--text-muted); }
+    .edition-note { margin-top: 0.25rem; }
+    @media (max-width: 560px) {
+      .editions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
+      .edition-card a { padding: 0.75rem; }
+      .edition-cover { height: 170px; }
+    }
+    @media (max-width: 340px) { .editions-grid { grid-template-columns: 1fr; } }
+
     .media-list { display: grid; gap: 0.7rem; }
     .media-item {
       background: var(--bg-alt);
@@ -253,6 +272,56 @@
         capitalism really works &mdash; and who is watching over it.
       </p>
     </div>
+  </section>
+
+  <section id="editions" aria-labelledby="editions-heading">
+    <h2 id="editions-heading">Editions and translations</h2>
+    <p class="editions-intro">Explore English-language and translated editions through their publishers and booksellers.</p>
+    <ul class="editions-grid">
+      <li class="edition-card">
+        <a href="https://www.blackincbooks.com.au/books/big-four">
+          <span class="edition-cover"><img src="assets/big-four/australia-uk.jpg" width="904" height="1382" alt=""></span>
+          <span class="edition-label">Australia / UK</span>
+          <span class="edition-publisher">Black Inc.</span>
+        </a>
+      </li>
+      <li class="edition-card">
+        <a href="https://www.penguinrandomhouse.com/books/588995/the-big-four-by-ian-d-gow-and-stuart-kells/9781523098019/">
+          <span class="edition-cover"><img src="assets/big-four/united-states.jpg" width="298" height="450" alt=""></span>
+          <span class="edition-label">United States</span>
+          <span class="edition-publisher">Berrett-Koehler</span>
+        </a>
+      </li>
+      <li class="edition-card">
+        <a href="https://search.megbook.com.tw/mall/detail.jsp?proID=3965831">
+          <span class="edition-cover"><img src="assets/big-four/simplified-chinese.jpg" width="370" height="500" alt=""></span>
+          <span class="edition-label">Simplified Chinese</span>
+          <span class="edition-publisher">China Machine Press</span>
+        </a>
+      </li>
+      <li class="edition-card">
+        <a href="https://www.cite.com.tw/book?id=83269">
+          <span class="edition-cover"><img src="assets/big-four/traditional-chinese.jpg" width="450" height="600" alt=""></span>
+          <span class="edition-label">Traditional Chinese</span>
+          <span class="edition-publisher">八旗文化 (Gusa Publishing)</span>
+          <span class="edition-note">Print edition out of print</span>
+        </a>
+      </li>
+      <li class="edition-card">
+        <a href="https://www.librariadelfin.ro/carte/big-four-ian-d-gow-stuart-kells--i57796">
+          <span class="edition-cover"><img src="assets/big-four/romanian.jpg" width="400" height="400" alt=""></span>
+          <span class="edition-label">Romanian</span>
+          <span class="edition-publisher">RAO Books</span>
+        </a>
+      </li>
+      <li class="edition-card">
+        <a href="https://bestbooks.com.vn/chu-de/ke-toan/">
+          <span class="edition-cover"><img src="assets/big-four/vietnamese.jpg" width="915" height="1417" alt=""></span>
+          <span class="edition-label">Vietnamese</span>
+          <span class="edition-publisher">BestBooks / NXB Tài chính</span>
+        </a>
+      </li>
+    </ul>
   </section>
 
   <section id="praise">
